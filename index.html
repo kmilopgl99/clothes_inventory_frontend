@@ -1,0 +1,792 @@
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clothes inventory</title>
+
+  <!------------------------LINKS ESTILOS Y FUENTES -->
+  <link rel="stylesheet" href="./vista/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./vista/css/style.css" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <!-------------------------HEAD-->
+</head>
+
+<!-------------------------BODY-->
+
+<!--------------SIDE-BAR------------>
+
+<body>
+  <div class="contenedor">
+    <nav class="sidebar close">
+      <header>
+        <div class="image-text">
+          <span class="image">
+            <img src="./recursos/img/vector menu png.png" alt="">
+          </span>
+          <div class="text header-text">
+            <span class="name">Camilo cortes</span>
+            <span class="rol">Usuario</span>
+          </div>
+        </div>
+        <i class='bx bx-chevron-right toggle'></i>
+      </header>
+      <div class="menu-bar">
+        <div class="menu">
+          <ul class="menu-links">
+            <li class="nav-link" onclick=pantallaPrincipal()>
+              <a href="#">
+                <i class='bx bxs-store icon'></i>
+                <span class="text nav-text">Almacen</span>
+                </i>
+              </a>
+            </li>
+            <li class="nav-link" onclick=mostrarProductos()>
+              <a href="#">
+                <i class='bx bx-closet icon'></i>
+                <span class="text nav-text">Productos</span>
+                </i>
+              </a>
+            </li>
+            <li class="nav-link" onclick=mostrarInforme()>
+              <a href="#">
+                <i class='bx bx-bar-chart icon'></i>
+                <span class="text nav-text">Informes</span>
+                </i>
+              </a>
+            </li>
+            <li class="nav-link" onclick=mostrarPerfiles()>
+              <a href="#">
+                <i class='bx bxs-user-detail icon'></i>
+                <span class="text nav-text">Perfiles</span>
+                </i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="encabezado">
+      <div class="encabezado2">
+        <div id="cab2-col-1">
+        </div>
+        <div id="cab2-col-2">
+          <img src="./recursos/img/logo clothes inventory.png" alt="" />
+        </div>
+        <div id="cab2-col-3">
+          <button id="btn-perfil">
+
+          </button>
+        </div>
+        <div id="cab2-col-4">
+          <button id="btn-salir" onclick="mostrarLogin()">
+            <img src="./recursos/img/vector_exit.png" alt="" srcset="" />
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="areaTrabajo">
+
+
+      <!-----------------------Inicio espacio de trabajo-------->
+
+
+      <div class="contenido" id="contenido">
+
+
+
+
+      </div>
+
+
+      <div class="lateral" id="lateral">
+      </div>
+
+      <!-----------------------Final espacio de trabajo-------->
+    </div>
+    <div class="footer"></div>
+  </div>
+
+
+  <!-- PLANTILLAS -->
+
+  <template id="encabezado1">
+    <img id="logo" src="./recursos/img/logo.png" alt="logo" />
+  </template>
+  <template id="encabezado2">
+    <div class="encabezado">
+      <div class="encabezado2">
+        <div id="cab2-col-1">
+          <button id="btn-menu">
+            <img src="./recursos/img/vector menu png.png" alt="" srcset="" />
+          </button>
+        </div>
+        <div id="cab2-col-2">
+          <img src="./recursos/img/logo clothes inventory.png" alt="" />
+        </div>
+        <div id="cab2-col-3">
+          <button id="btn-perfil">
+            <img src="./recursos/img/vector_user.png" alt="" srcset="" />
+          </button>
+        </div>
+        <div id="cab2-col-4">
+          <button id="btn-salir">
+            <img src="./recursos/img/vector_exit.png" alt="" srcset="" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </template>
+  <template id="formLogin">
+    
+      <div class="containerForm">
+        <form id="formularioLogin">
+          <div class="mb-3">
+            <input type="email" class="form-control" name="correo_electronico" placeholder="Correo Electronico" />
+          </div>
+          <div class="mb-3">
+            <input type="password" class="form-control" name="contrasena" placeholder="Contraseña" />
+          </div>
+        </form>
+
+        <button type="button" class="btn btn-login" onclick="login()">Iniciar Sesión</button>
+        <button type="button" class="btn btn-forget">
+          ¿Olvidaste la Contraseña?
+        </button>
+        <hr />
+        <br />
+        <button type="button" class="btn btn-login" onclick=crearUsuario()>Crear Cuenta</button>
+      
+      </div>
+  </template>
+  <template id="formRegister">
+    <div class="containerForm">
+      <div class="tituloForm">REGISTRATE</div>
+      <hr />
+      <div class="mb-3">
+        <input type="text" class="form-control" name="nombre_usuario" placeholder="Nombre usuario" />
+      </div>
+      <div class="mb-3">
+        <select name="tipo_documento" id="" class="form-control">
+          <option value="0">Tipo de documento</option>
+          <option value="1">Cedula de ciudadania</option>
+          <option value="2">Tarjeta de identidad</option>
+          <option value="3">Permiso especial de permanencia</option>
+          <option value="3">Pasaporte</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <input type="numero" class="form-control" name="numero_documento" placeholder="Numero de documento" />
+      </div>
+      <div class="mb-3">
+        <input type="email" class="form-control" name="correo_electronico" placeholder="Correo Electronico" />
+      </div>
+      <div class="mb-3">
+        <input type="contraseña" class="form-control" name="contraseña" placeholder="Contraseña" />
+      </div>
+      <div class="mb-3">
+        <input type="contraseña" class="form-control" name="contraseña" placeholder="Confirmar contraseña" />
+      </div>
+      <button type="button" class="btn btn-login" onclick=crearAlmacen()>Crear Cuenta</button>
+    </div>
+  </template>
+  <template id="login">
+    <div class="botones">
+      <button id="btn-añadir" onclick=crearAlmacenEmergente()>
+        <img src="./recursos/img/vector_mas1.png" alt="" class="iconoMas" />
+      </button>
+    </div>
+  </template>
+  <template id="pantallaPrincipal">
+    <div class="botones">
+      <button id="btn-añadir">
+        <img src="./recursos/img/vector_mas1.png" alt="" class="iconoMas" />
+      </button>
+    </div>
+    </div>
+  </template>
+  <template id="seleccionAlmacen">
+    <h2>>Almacenes</h2>
+    <div id="cuadroAlmacen">
+      <button id="btn-almacen" onclick=entrarAlmacen()>
+        <i class='bx bxs-store icon'></i>
+        <h2>Almacen 1</h2>
+      </button>
+    </div>
+  </template>
+  <template id="panel-3-botones">
+    <div class="botones">
+      <button id="btn-añadir" onclick=crearAlmacenEmergente()>
+        <img src="./recursos/img/vector_mas1.png" alt="" class="iconoMas" />
+      </button>
+      <button id="btn-editar" onclick="editarAlmacenEmergente()">
+        <img src="./recursos/img/vector_editar1.png" alt="" class="iconoEditar" />
+      </button>
+      <button id="btn-eliminar" onclick="emergenteEliminar()">
+        <img src="./recursos/img/vector_eliminar1.png" alt="" class="iconoEliminar" />
+      </button>
+
+    </div>
+  </template>
+  <template id="nuevo-almacen-emergente">
+    <div class="containerForm">
+      <div class="tituloForm">Nuevo almacen</div>
+      <hr />
+      <div class="mb-3">
+        <input type="text" class="form-control" name="nombre_almacen" placeholder="Nombre almacen" />
+      </div>
+      <button type="button" class="btn btn-login" onclick="pantallaPrincipal()">Crear almacen</button>
+
+      <button type="button" class="btn btn-login" style="margin-top: 10px;"
+        onclick=pantallaPrincipal()>Cancelar</button>
+    </div>
+  </template>
+  <template id="editar-almacen">
+    <div class="containerForm">
+      <div class="tituloForm">Editar almacen</div>
+      <hr />
+      <div class="mb-3">
+        <input type="text" class="form-control" name="nombre_almacen" placeholder="Almacen xxxx " />
+      </div>
+      <button type="button" class="btn btn-login" onclick="pantallaPrincipal()">Guardar Cambios</button>
+      <button type="button" class="btn btn-login" style="margin-top: 10px;"
+        onclick="pantallaPrincipal()">Cancelar</button>
+    </div>
+  </template>
+  <template id="contenido-lateral">
+    <div class="contenido" id="contenido">
+
+    </div>
+    <div class="lateral" id="lateral">
+
+    </div>
+  </template>
+  <template id="emergente-eliminar">
+    <div class="containerForm">
+      <div class="tituloForm">Eliminar almacen</div>
+      <hr />
+      <div class="mb-3">
+        <select class="form-select">
+          <option selected>Seleccionar almacen</option>
+          <option value="1">xxxxx</option>
+          <option value="2">aaaaaa</option>
+          <option value="3">xxxxx</option>
+        </select>
+        <button type="button" class="btn btn-login" onclick="pantallaPrincipal()">Eliminar</button>
+        <button type="button" class="btn btn-login" style="margin-top: 10px;"
+          onclick=pantallaPrincipal()>Cancelar</button>
+      </div>
+  </template>
+  <template id="almacen-1">
+    <h2>>Almacenes>Almacen 1</h2>
+    <div class="panel-superior">
+      <button id="btn-entrada" onclick=crearEntrada()>
+        <i class='bx bx-door-open'></i>
+      </button>
+      <button id="btn-salida" onclick=crearSalida()>
+        <i class='bx bx-exit'></i>
+      </button>
+    </div>
+    <table class="table caption-top">
+      <caption>Stock almacen 1</caption>
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">producto</th>
+          <th scope="col">cantidad</th>
+          <th scope="col">costo</th>
+          <th scope="col">precio venta</th>
+          <th scope="col">origen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Camiseta amiri</td>
+          <td>50</td>
+          <td>$50.000</td>
+          <td>$150.000</td>
+          <td>China</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Camiseta Polo</td>
+          <td>13</td>
+          <td>$80.000</td>
+          <td>$120.000</td>
+          <td>Colombia</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Jean dsquared</td>
+          <td>27</td>
+          <td>$60.000</td>
+          <td>$100.000</td>
+          <td>Ecuador</td>
+        </tr>
+      </tbody>
+    </table>
+  </template>
+  <template id="crear-entrada">
+    <div class="containerForm">
+      <div class="tituloForm">Crear entrada</div>
+      <hr />
+      <div class="mb-3">
+        <select class="form-select">
+          <option selected>Seleccionar producto</option>
+          <option value="1">Camiseta amiri</option>
+          <option value="2">Camiseta polo</option>
+          <option value="3">Jean dsquared</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <input type="number" class="form-control" name="cantidad-producto" placeholder="Cantidad producto" />
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" name="costo-producto" placeholder="Costo producto" />
+      </div>
+      <div class="mb-3">
+        <input type="texto" class="form-control" name="origen" placeholder="Origen" />
+      </div>
+      <button type="button" class="btn btn-login" onclick=entrarAlmacen()>Crear entrada</button>
+      <hr>
+      <button type="button" class="btn btn-login" onclick=entrarAlmacen()>Cancelar</button>
+    </div>
+  </template>
+  <template id="crear-salida">
+    <div class="containerForm">
+      <div class="tituloForm">Crear Salida</div>
+      <hr />
+      <div class="mb-3">
+        <select class="form-select">
+          <option selected>Seleccionar producto</option>
+          <option value="1">Camiseta amiri</option>
+          <option value="2">Camiseta polo</option>
+          <option value="3">Jean dsquared</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <input type="number" class="form-control" name="cantidad-producto" placeholder="Cantidad producto" />
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" name="precio-producto" placeholder="Precio producto" />
+      </div>
+      <div class="mb-3">
+        <input type="texto" class="form-control" name="destino" placeholder="Destino" />
+      </div>
+      <button type="button" class="btn btn-login" onclick=entrarAlmacen()>Crear Salida</button>
+      <hr>
+      <button type="button" class="btn btn-login" onclick=entrarAlmacen()>Cancelar</button>
+    </div>
+  </template>
+  <template id="productos">
+    <h2>>Productos</h2>
+    <div class="panel-superior">
+      <button id="btn-nuevo-producto" onclick=crearProducto()>
+        <i class='bx bx-list-plus'></i>
+      </button>
+      <button id="btn-editar-producto" onclick=editarProducto()>
+        <i class='bx bx-edit'></i>
+        <button id="btn-eliminar-producto" onclick=eliminarProducto()>
+          <i class='bx bx-trash'></i>
+        </button>
+    </div>
+    <table class="table caption-top">
+      <caption>Stock almacen 1</caption>
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Codigo producto</th>
+          <th scope="col">Nombre Productos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>001</td>
+          <td>Camiseta amiri</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>001</td>
+          <td>Camiseta Polo</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>001</td>
+          <td>Jean dsquared</td>
+        </tr>
+      </tbody>
+    </table>
+  </template>
+  <template id="crear-producto">
+    <div class="containerForm">
+      <div class="tituloForm">Crear producto</div>
+      <hr />
+      <div class="mb-3">
+        <input type="number" class="form-control" name="codigo-producto" placeholder="Codigo producto" />
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" name="nombre-producto" placeholder="Nombre producto" />
+      </div>
+      <button type="button" class="btn btn-login" onclick=mostrarProductos()>Crear Producto</button>
+      <hr>
+      <button type="button" class="btn btn-login" onclick=mostrarProductos()>Cancelar</button>
+    </div>
+  </template>
+  <template id="editar-producto">
+    <div class="containerForm">
+      <div class="tituloForm">Editar producto</div>
+      <hr />
+      <div class="mb-3">
+        <select class="form-select">
+          <option selected>Seleccionar producto</option>
+          <option value="1">Camiseta amiri</option>
+          <option value="2">Camiseta polo</option>
+          <option value="3">Jean dsquared</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" name="codigo-producto" placeholder="Codigo producto" />
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" name="nombre-producto" placeholder="Nombre producto" />
+      </div>
+      <button type="button" class="btn btn-login" onclick=mostrarProductos()>Guardar cambios</button>
+      <hr>
+      <button type="button" class="btn btn-login" onclick=mostrarProductos()>Cancelar</button>
+    </div>
+  </template>
+  <template id="eliminar-producto">
+    <div class="containerForm">
+      <div class="tituloForm">Eliminar producto</div>
+      <hr />
+      <div class="mb-3">
+        <select class="form-select">
+          <option selected>Seleccionar producto</option>
+          <option value="1">Camiseta amiri</option>
+          <option value="2">Camiseta polo</option>
+          <option value="3">Jean dsquared</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-login" onclick=mostrarProductos()>Eliminar</button>
+      <hr>
+      <button type="button" class="btn btn-login" onclick=mostrarProductos()>Cancelar</button>
+    </div>
+  </template>
+  <template id="informes">
+    <h2>Informes</h2>
+    <div id="cuadroAlmacen" style="display: flex; align-items: center; justify-content: center;">
+      <button id="btn-almacen" onclick=mostrarMovimientos()>
+        <i class='bx bxs-store icon'></i>
+        <h2>Movimientos</h2>
+      </button>
+    </div>
+    <div id="cuadroAlmacen" style="display: flex; align-items: center; justify-content: center;"">
+          <button id=" btn-almacen" onclick=entrarAlmacen()>
+      <i class='bx bxs-store icon'></i>
+      <h2>Productos por almacen</h2>
+      </button>
+    </div>
+    <div id="cuadroAlmacen" style="display: flex; align-items: center; justify-content: center;"">
+          <button id=" btn-almacen" onclick=entrarAlmacen()>
+      <i class='bx bxs-store icon'></i>
+      <h2>Stock minimo</h2>
+      </button>
+    </div>
+  </template>
+  <template id="movimientos">
+    <h2>Movimientos</h2>
+    <div class="panel-superior">
+      <button id="btn-nuevo-producto" onclick=descargarMovimientos()>
+        <i class='bx bx-download'></i>
+      </button>
+    </div>
+    <table class="table caption-top" style="font-size: 11px;">
+      <caption>Ultimos movimientos</caption>
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Tipo de movimiento</th>
+          <th scope="col">Almacen</th>
+          <th scope="col">Nombre Producto</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Costo</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Origen</th>
+          <th scope="col">Destino</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row" style="background-color: green;">1</th>
+          <td>Entrada</td>
+          <td>Almacen 1</td>
+          <td>Camisetas amiri</td>
+          <td>12</td>
+          <td>$80.000</td>
+          <td>$120.000</td>
+          <td>China</td>
+          <td>Centro</td>
+        </tr>
+        <tr>
+          <th scope="row" style="background-color: red;">1</th>
+          <td>Salida</td>
+          <td>Almacen 1</td>
+          <td>Camisetas amiri</td>
+          <td>12</td>
+          <td>$80.000</td>
+          <td>$120.000</td>
+          <td>China</td>
+          <td>Centro</td>
+        </tr>
+        <tr>
+          <th scope="row" style="background-color: green;">1</th>
+          <td>Entrada</td>
+          <td>Almacen 1</td>
+          <td>Camisetas amiri</td>
+          <td>12</td>
+          <td>$80.000</td>
+          <td>$120.000</td>
+          <td>China</td>
+          <td>Centro</td>
+        </tr>
+        <tr>
+          <th scope="row" style="background-color: green;">1</th>
+          <td>Entrada</td>
+          <td>Almacen 1</td>
+          <td>Camisetas amiri</td>
+          <td>12</td>
+          <td>$80.000</td>
+          <td>$120.000</td>
+          <td>China</td>
+          <td>Centro</td>
+        </tr>
+        <tr>
+          <th scope="row" style="background-color: green;">1</th>
+          <td>Entrada</td>
+          <td>Almacen 1</td>
+          <td>Camisetas amiri</td>
+          <td>12</td>
+          <td>$80.000</td>
+          <td>$120.000</td>
+          <td>China</td>
+          <td>Centro</td>
+        </tr>
+        <tr>
+          <th scope="row" style="background-color: red;">1</th>
+          <td>Entrada</td>
+          <td>Almacen 1</td>
+          <td>Camisetas amiri</td>
+          <td>12</td>
+          <td>$80.000</td>
+          <td>$120.000</td>
+          <td>China</td>
+          <td>Centro</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </template>
+  <template id="descargar-movimientos">
+    <div class="containerForm">
+      <div class="tituloForm">Descargar movimientos</div>
+      <hr />
+      <h2>Fecha inicio</h2>
+      <div class="mb-3">
+        <input type="date" class="form-control" name="nombre_almacen" placeholder="Fecha inicial" />
+      </div>
+      <h2>Fecha final</h2>
+      <div class="mb-3">
+        <input type="date" class="form-control" name="nombre_almacen" placeholder="Fecha final" />
+      </div>
+      <button type="button" class="btn btn-login" onclick=mostrarMovimientos()>Descargar</button>
+      <hr>
+      <button type="button" class="btn btn-login" onclick=mostrarMovimientos()>Cancelar</button>
+    </div>
+  </template>
+  <template id="perfiles">
+    <h2>>Perfiles</h2>
+    <div class="panel-superior">
+      <button id="btn-nuevo-producto" onclick=crearPerfiles()>
+        <i class='bx bx-list-plus'></i>
+      </button>
+      <button id="btn-editar-producto" onclick=editarPerfiles()>
+        <i class='bx bx-edit'></i>
+        <button id="btn-eliminar-producto" onclick=eliminarPerfiles()>
+          <i class='bx bx-trash'></i>
+        </button>
+    </div>
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-person"
+        viewBox="0 0 16 16">
+        <path
+          d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+      </svg>
+      <h2 style="margin-left: 40px;">User</h2>
+    </div>
+  </template>
+  <template id="crear-perfil">
+    <div class="containerForm">
+      <div class="tituloForm">CREAR PERFIL</div>
+      <hr />
+      <div class="mb-3">
+        <input type="text" class="form-control" name="nombre_usuario" placeholder="Nombre usuario" />
+      </div>
+      <div class="mb-3">
+        <select name="tipo_documento" id="" class="form-control">
+          <option value="0">Tipo de documento</option>
+          <option value="1">Cedula de ciudadania</option>
+          <option value="2">Tarjeta de identidad</option>
+          <option value="3">Permiso especial de permanencia</option>
+          <option value="3">Pasaporte</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <input type="numero" class="form-control" name="numero_documento" placeholder="Numero de documento" />
+      </div>
+      <div class="mb-3">
+        <input type="email" class="form-control" name="correo_electronico" placeholder="Correo Electronico" />
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" name="contraseña" placeholder="Contraseña" />
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" name="contraseña" placeholder="Confirmar contraseña" />
+      </div>
+      <button type="button" class="btn btn-login" onclick=mostrarPerfiles()>Crear Perfil</button><br>
+      <br>
+
+      <button type="button" class="btn btn-login" onclick=mostrarPerfiles()>Cancelar</button>
+    </div>
+  </template>
+  <template id="editar-perfil">
+    <div class="containerForm">
+      <div class="tituloForm">Editar Perfil</div>
+      <hr />
+      <div class="mb-3">
+        <select class="form-select">
+          <option selected>Seleccionar Perfil</option>
+          <option value="1">User 1</option>
+          <option value="2">User 2</option>
+          <option value="3">User 3</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" name="nombre-perfil" placeholder="Nombre de perfil" />
+      </div>
+      <div class="mb-3">
+        <select name="tipo_documento" id="" class="form-control">
+          <option value="0">Tipo de documento</option>
+          <option value="1">Cedula de ciudadania</option>
+          <option value="2">Tarjeta de identidad</option>
+          <option value="3">Permiso especial de permanencia</option>
+          <option value="3">Pasaporte</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <input type="numero" class="form-control" name="numero_documento" placeholder="Numero de documento" />
+      </div>
+      <div class="mb-3">
+        <input type="email" class="form-control" name="correo_electronico" placeholder="Correo Electronico" />
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" name="contraseña" placeholder="Contraseña" />
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" name="contraseña" placeholder="Confirmar contraseña" />
+      </div>
+
+      <button type="button" class="btn btn-login" onclick=mostrarPerfiles()>Guardar cambios</button>
+      <hr>
+      <button type="button" class="btn btn-login" onclick=mostrarPerfiles()>Cancelar</button>
+
+    </div>
+  </template>
+  <template id="eliminar-perfil">
+    <div class="containerForm">
+      <div class="tituloForm">Eliminar perfil</div>
+      <hr />
+      <div class="mb-3">
+        <select class="form-select">
+          <option selected>Seleccionar perfil</option>
+          <option value="1">user 1</option>
+          <option value="2">user 2</option>
+          <option value="3">user 3</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-login" onclick=mostrarPerfiles()>Eliminar</button>
+      <hr>
+      <button type="button" class="btn btn-login" onclick=mostrarPerfiles()>Cancelar</button>
+    </div>
+  </template>
+
+  <!-------------SCRIPTS--------------------------------->
+
+  <script src="./vista/js/script-sidebar.js"></script>
+  <script src="./vista/js/jquery_3_7_1.js"></script>
+  <script src="./vista/js/bootstrap.min.js"></script>
+  <script src="./vista/js/bootstrap.bundle.min.js"></script>
+  <script src="./vista/js/vista.js"></script>
+  <script src="./model/connect.js"></script>
+  <script src="./model/user.js"></script>
+  <script src="./controlador/controlador.js"></script>
+
+
+</body>
+
+</html>
+
+<!-------------FIN----------------------------------------->
+
+
+
+<!--Ventanas emergentes
+ <div class="modal" tabindex="-1" role="dialog" id="modal-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-titulo"></h5>
+
+        
+        </button>
+      </div>
+      <div class="modal-body" id="modal-cuerpo">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Guardar cambios</button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >
+         Salir
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+
+<!----
+<div class="contenido" id="contenido">
+</div>
+<div class="containerForm">
+  <div class="tituloForm">Editar almacen</div>
+  <hr />
+  <div class="mb-3">
+    <input
+      type= "checkbox"
+      
+    />
+  </div>
+  <button type="button" class="btn btn-login" onclick="pantallaPrincipal()">Guardar Cambios</button>
+</div>
+<div class="lateral" id="lateral">
+</div>
+-->
